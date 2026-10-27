@@ -1,4 +1,5 @@
-// FlappyBird-Lite.js - CYD-2432S028 / Bruce 1.16.1 - toque na tela = bater asa
+// Flappy Bird Lite - CYD 2432S028 / Bruce 1.16.1
+// Touch screen to flap
 var d=require("display"),kb=require("keyboard");
 var W=d.width(),H=d.height(),G=H-20;
 var BLUE=d.color(30,144,255),GREEN=d.color(34,180,60),YEL=d.color(255,220,0),
@@ -34,8 +35,8 @@ while(true){
     if(px<-32){px=W+8;ppx=px;gap=35+random(0,75);sc++;sw=1}
     if(by>H-28||by<6)alive=0;
     if(px<52&&px>12&&(by-8<gap||by+8>gap+68))alive=0;
-    r(34,pby-8,22,17,BLUE);                       // apaga passaro antigo
-    r(Math.floor(px)+29,0,Math.floor(ppx)-Math.floor(px)+3,G-2,BLUE); // apaga rastro do cano
+    r(34,pby-8,22,17,BLUE);
+    r(Math.floor(px)+29,0,Math.floor(ppx)-Math.floor(px)+3,G-2,BLUE);
     pipe();bird();pby=by;
     if(sw)score();
     if(!alive){
@@ -43,7 +44,7 @@ while(true){
       d.drawString("GAME OVER",W/2-55,H/2-24);
       d.setTextSize(1);d.setTextColor(WHT);
       d.drawString("Score "+sc+"  Best "+(sc>best?sc:best),W/2-48,H/2+2);
-      d.drawString("Toque = jogar",W/2-35,H/2+20)
+      d.drawString("Touch to play",W/2-35,H/2+20)
     }
   }
   delay(25)
