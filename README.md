@@ -1,55 +1,37 @@
-# Flappy Bird Lite — CYD ESP32-2432S028 + Bruce Firmware
+# Flappy Bird Lite for CYD + Bruce
 
-Versão ultra-leve do clássico Flappy Bird escrita em JavaScript puro para o interpretador do **Bruce Firmware 1.16.1** no **Cheap Yellow Display (ESP32-2432S028)**.
+Simple Flappy Bird clone made for the Cheap Yellow Display (ESP32-2432S028) running Bruce Firmware.
 
-Toque em qualquer lugar da tela (ou botões) para bater asa.
+Touch the screen to flap.
 
-## Hardware
+## Requirements
 
-- **Placa:** ESP32-2432S028 (CYD) — tela 2.8" TFT 320x240 touch
-- **Firmware:** Bruce 1.16.1 (ou superior com JS Interpreter)
-- **Entrada:** Touch + teclado virtual do Bruce (`keyboard` module)
+- Board: ESP32-2432S028 (CYD)
+- Firmware: Bruce 1.16.1 or newer (needs the JS interpreter)
 
-## Como instalar
+## How to install
 
-1. Conecte o CYD ao Wi-Fi (ou use o hotspot do próprio Bruce).
-2. Abra a **Bruce Web Interface** no navegador.
-3. Vá em **File Manager** → pasta `/apps` (ou `/` se preferir).
-4. Faça upload do arquivo `FlappyBird-Lite.js`.
-5. No menu do dispositivo: **Apps / Files / Launcher** → selecione `FlappyBird-Lite.js`.
+1. Connect the CYD to WiFi (or use the Bruce hotspot)
+2. Open the Bruce web interface
+3. Go to File Manager and upload `FlappyBird-Lite.js` to the `/apps` folder (or root)
+4. On the device, open Apps / Files and run the script
 
-Alternativa rápida via SD card:
-- Copie o `.js` para a raiz ou pasta `apps` do cartão SD e lance pelo menu de arquivos.
+You can also just copy the file to a SD card and launch it from there.
 
-## Controles
+## Controls
 
-| Ação              | Como                          |
-|-------------------|-------------------------------|
-| Bater asa         | Toque na tela ou qualquer botão |
-| Reiniciar         | Toque após Game Over (espera 600 ms) |
-| Sair              | Select ou Esc quando morto    |
+- Touch anywhere (or any button) = flap
+- After game over, touch again to restart
+- Select or Esc when dead = exit
 
-## Características técnicas
+## Notes
 
-- Física simples com gravidade constante (`bv += 0.27`)
-- Impulso de asa fixo (`bv = -4`)
-- Colisão AABB com canos e solo
-- Score + Best score em memória (não persiste entre reinícios do script)
-- Otimizado para tela pequena e heap limitado do CYD (sem PSRAM)
-- Delay de 25 ms ≈ 40 FPS teóricos
+Physics is very basic. Gravity is constant, flap is a fixed upward force. Collision is simple AABB against the pipes and the ground.
 
-## Estrutura do código
+Score and best score are only kept while the script is running (they reset when you leave the game).
 
-- `r()` — helper de retângulo preenchido com clipping
-- `tapped()` — detecta qualquer pressão (touch ou botões)
-- `bg()` / `pipe()` / `bird()` — desenho imediato (sem buffer de frame completo)
-- Loop principal com erase seletivo para minimizar overdraw
-
-## Licença
-
-Código livre para uso pessoal e educacional. Baseado no clássico Flappy Bird (conceito original de Dong Nguyen).
+Made this because I wanted a quick playable Flappy Bird on the CYD without any extra libraries.
 
 ---
 
-Feito para o ecossistema Bruce + CYD.  
-Divirta-se quebrando recordes, Senhor Arthur.
+File: `FlappyBird-Lite.js`
